@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createSearchParams, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {  useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchMovieDetails, fetchTvDetails } from "../redux/detailsSlice";
 
@@ -10,9 +10,9 @@ const MoviesCard = ({
     setModal,
     removeContinueWatching,
 }) => {
-    const [searchParams] = useSearchParams();
+    // const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");

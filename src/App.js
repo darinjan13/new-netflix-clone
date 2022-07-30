@@ -15,7 +15,6 @@ import NotFound from "./Pages/NotFound.jsx";
 import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
 import HomeNavbar from "./Components/HomeNavbar.jsx";
 import Footer from "./Components/Footer.jsx";
-import Modal from "./Components/Modal.jsx";
 
 function App() {
     const currentUser = JSON.parse(localStorage.getItem("user"));
