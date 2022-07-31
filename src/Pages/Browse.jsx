@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { CustomRightArrow, CustomLeftArrow } from "../Components/CustomArrows";
 import { fetchPopularMovies, fetchPopularTv } from "../redux/popularsSlice";
 import { fetchKDrama, fetchAnime } from "../redux/discoverSlice";
-import { fetchNewReleases } from "../redux/newReleasesSlice";
+// import { fetchNewReleases } from "../redux/newReleasesSlice";
 import { addToWatched, useUpdateTitle } from "../Hooks/Hooks.jsx";
 
 import Modal from "../Components/Modal";
@@ -25,7 +25,7 @@ const Browse = () => {
     const [modal, setModal] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState({});
     const [kDrama, setKDrama] = useState();
-    const [newRelease, setNewRelease] = useState();
+    // const [newRelease, setNewRelease] = useState();
     const [popularMovies, setPopularMovies] = useState();
     const [popularTv, setPopularTv] = useState();
     const [anime, setAnime] = useState();
