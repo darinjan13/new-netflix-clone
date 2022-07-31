@@ -7,7 +7,7 @@ import { fetchSearch } from "../redux/searchSlice";
 import { useUpdateTitle } from "../Hooks/Hooks";
 
 import Modal from "../Components/Modal";
-import Row from "../Components/Row";
+import MoviesCard from "../Components/MovieCard";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const Search = () => {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01],
             }}
-            className="bg-gray-900/90 overflow-hidden"
+            className="bg-gray-900/90 overflow-hidden min-h-screen"
         >
             {selectedMovie && (
                 <Modal
@@ -53,7 +53,7 @@ const Search = () => {
             )}
             <button onClick={() => setPage(page + 1)}>Load More</button>
             {results !== null && (
-                <div className="box-border py-10 px-[60px]">
+                <div className="box-border py-10 px-[10px] md:px-[60px]">
                     <motion.div
                         // key={searchParams}
                         // initial={{opacity: 0}}
@@ -64,7 +64,7 @@ const Search = () => {
                     >
                         {results?.map((result, id) => {
                             return (
-                                <Row
+                                <MoviesCard
                                     key={id}
                                     movies={result}
                                     setSelectedMovie={setSelectedMovie}

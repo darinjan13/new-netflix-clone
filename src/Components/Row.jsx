@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {  useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchMovieDetails, fetchTvDetails } from "../redux/detailsSlice";
 
-const MoviesCard = ({
+const Row = ({
     movies,
     setSelectedMovie,
     setModal,
@@ -52,22 +52,21 @@ const MoviesCard = ({
 
     return (
         <>
-            <div
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                    duration: 0.5,
+                }}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 className={`${
-                    splitLocation[1] === "search" && "mb-10 md:mb-20 mx-1 md:mx-2 "
-                } md:hover:z-40 relative md:hover:shadow-2xl md:hover:scale-150 transition-all duration-1000 `}
+                    splitLocation[1] === "search" &&
+                    "mb-10 md:mb-20 mx-1 md:mx-2 "
+                } md:hover:z-40 relative md:hover:shadow-2xl md:hover:scale-150 transition-all duration-1000`}
             >
-                <motion.img
-                    key={movies.backdrop_path}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                        duration: 2,
-                        delay: 1,
-                        ease: [0, 0.71, 0.2, 1.01],
-                    }}
+                <img
                     className="w-full h-full"
                     onClick={onClickImage}
                     src={`${process.env.REACT_APP_IMAGE_URL}original${movies.backdrop_path}`}
@@ -75,8 +74,8 @@ const MoviesCard = ({
                 />
                 <span
                     className={`${
-                        show === false ? "opacity-0" : "md:opacity-100"
-                    }  bg-slate-900/70 absolute inset-x-0 bottom-0 transition-all duration-1000`}
+                        show === false ? "opacity-0" : "opacity-100"
+                    } hidden md:block bg-slate-900/70 absolute inset-x-0 bottom-0 transition-all duration-1000`}
                 >
                     <h1 className="text-center inline-block w-auto">
                         {movies.title !== undefined
@@ -89,9 +88,9 @@ const MoviesCard = ({
                             : movies.first_air_date?.slice(0, 4)}
                     </h1>
                 </span>
-            </div>
+            </motion.div>
         </>
     );
 };
 
-export default MoviesCard;
+export default Row;

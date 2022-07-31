@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 // import YouTube, { YouTubeProps } from 'react-youtube'
 
 import { CustomRightArrow, CustomLeftArrow } from "../Components/CustomArrows";
 import { fetchPopularMovies, fetchPopularTv } from "../redux/popularsSlice";
 import { fetchKDrama, fetchAnime } from "../redux/discoverSlice";
-// import { fetchNewReleases } from "../redux/newReleasesSlice";
+import { fetchNewReleases } from "../redux/newReleasesSlice";
 import { addToWatched, useUpdateTitle } from "../Hooks/Hooks.jsx";
 
 import Modal from "../Components/Modal";
@@ -25,12 +25,12 @@ const Browse = () => {
     const [modal, setModal] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState({});
     const [kDrama, setKDrama] = useState();
-    // const [newRelease, setNewRelease] = useState();
+    const [newRelease, setNewRelease] = useState();
     const [popularMovies, setPopularMovies] = useState();
     const [popularTv, setPopularTv] = useState();
     const [anime, setAnime] = useState();
 
-    useUpdateTitle("Browse");
+    useUpdateTitle("Home");
 
     useEffect(() => {
         if (Object.keys(selectedMovie).length !== 0) {
@@ -46,13 +46,13 @@ const Browse = () => {
             .then((originalPromiseResult) => {
                 setPopularMovies(originalPromiseResult);
             });
-        //New Release
-        // dispatch(fetchNewReleases())
-        //     .unwrap()
-        //     .then((originalPromiseResult) => {
-        //         setNewRelease(originalPromiseResult);
-        //     });
-        //Popular Tv
+        // New Release
+        dispatch(fetchNewReleases())
+            .unwrap()
+            .then((originalPromiseResult) => {
+                setNewRelease(originalPromiseResult);
+            });
+        // Popular Tv
         dispatch(fetchPopularTv())
             .unwrap()
             .then((originalPromiseResult) => {
@@ -90,17 +90,11 @@ const Browse = () => {
             slidesPerGroup: 5,
         },
     };
-    const mx40 = "mx-[60px]";
+    const mx40 = "ml-[10px] md:ml-[60px]";
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-                duration: 0.8,
-                delay: 0.5,
-                ease: [0, 0.71, 0.2, 1.01],
-            }}
-            className="h-full w-full block overflow-hidden bg-gray-900/80 text-white py-5"
+        <div
+            
+            className="min-h-screen w-full block overflow-hidden bg-gray-900/80 text-white py-5"
         >
             <>
                 {selectedMovie && (
@@ -112,9 +106,9 @@ const Browse = () => {
                     />
                 )}
                 <div className="space-y-10">
-                    <div>
+                    <div className="w-full max-h-[150px]">
                         <div className={mx40}>New Release</div>
-                        {/* <Swiper
+                        <Swiper
                             freeMode
                             speed={1000}
                             slidesPerView={4}
@@ -126,9 +120,9 @@ const Browse = () => {
                             {renderSwiperSlides(newRelease)}
                             <CustomLeftArrow />
                             <CustomRightArrow />
-                        </Swiper> */}
+                        </Swiper>
                     </div>
-                    <div>
+                    <div className="w-full md:h-[150px]">
                         <div className={mx40}>Popular K-Drama</div>
                         <Swiper
                             freeMode
@@ -144,7 +138,7 @@ const Browse = () => {
                             <CustomRightArrow />
                         </Swiper>
                     </div>
-                    <div>
+                    <div className="w-full md:h-[150px]">
                         <div className={mx40}>Popular Movies</div>
                         <Swiper
                             freeMode
@@ -160,7 +154,7 @@ const Browse = () => {
                             <CustomRightArrow />
                         </Swiper>
                     </div>
-                    <div>
+                    <div className="w-full md:h-[150px]">
                         <div className={mx40}>Popular TV Shows</div>
                         <Swiper
                             freeMode
@@ -176,7 +170,7 @@ const Browse = () => {
                             <CustomRightArrow />
                         </Swiper>
                     </div>
-                    <div>
+                    <div className="w-full md:h-[150px]">
                         <div className={mx40}>Anime</div>
                         <Swiper
                             freeMode
@@ -204,7 +198,7 @@ const Browse = () => {
             {/* {loadingTv === "Fulfilled" && loadingMovie === "Fulfilled" && (
                 
             )} */}
-        </motion.div>
+        </div>
     );
 };
 

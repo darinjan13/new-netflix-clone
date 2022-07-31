@@ -21,7 +21,6 @@ export const fetchSearch = createAsyncThunk(
                 }
             });
         }
-        console.log(arr);
         return arr;
     }
 );

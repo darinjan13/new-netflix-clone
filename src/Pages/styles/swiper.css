@@ -2,8 +2,8 @@
     padding: 0 60px !important;
     overflow: visible !important;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     .swiper {
-        padding: 0 60px !important;
+        padding: 0 10px !important;
     }
 }

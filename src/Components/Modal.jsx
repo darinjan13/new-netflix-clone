@@ -57,20 +57,20 @@ const Modal = ({ selectedMovie, modal, setModal }) => {
                                             </svg>
                                         </button>
                                         <img
-                                            className="h-1/2"
+                                            className="md:h-1/2"
                                             src={`${process.env.REACT_APP_IMAGE_URL}original${details?.backdrop_path}`}
                                             alt=""
                                         />
-                                        <div className="w-full bg-zinc-900 text-white pb-10 mx-auto -mt-20">
-                                            <h1 className="block font-bold text-xl text-center mb-10">
+                                        <div className="w-full bg-zinc-900 text-white pb-10 mx-auto md:-mt-20">
+                                            <h1 className="block font-bold text-xl text-center mb-5 md:mb-10">
                                                 {details?.title !== null &&
                                                     details?.title}
                                                 {details?.name !==
                                                     null &&
                                                     details?.name}
                                             </h1>
-                                            <div className="grid grid-flow-row-dense text-start mx-5 grid-cols-3 gap-5">
-                                                <h1 className="col-span-2 pl-10">
+                                            <div className="md:grid grid-flow-row-dense text-start grid-cols-3 gap-5 mx-5 space-y-5 md:space-y-0">
+                                                <h1 className="col-span-2 pl-3 text-sm md:text-lg md:pl-10">
                                                     {details?.overview}
                                                 </h1>
                                                 <div>

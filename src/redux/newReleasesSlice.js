@@ -9,10 +9,10 @@ export const fetchNewReleases = createAsyncThunk(
         const tommorrow = moment().add(1, "day").format("YYYY-MM-DD");
         let arr = [];
         let url = `${process.env.REACT_APP_API_URL}/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=`;
-        for (let page = 1; page < 67; page++) {
+        for (let index = 1; index < 5; index++) {
             const {
                 data: { results },
-            } = await axios.get(`${url}${page}`);
+            } = await axios.get(`${url}${index}`);
             results.forEach((result) => {
                 if (
                     moment(result.release_date).isBetween(
