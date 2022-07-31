@@ -47,11 +47,11 @@ const Browse = () => {
                 setPopularMovies(originalPromiseResult);
             });
         //New Release
-        dispatch(fetchNewReleases())
-            .unwrap()
-            .then((originalPromiseResult) => {
-                setNewRelease(originalPromiseResult);
-            });
+        // dispatch(fetchNewReleases())
+        //     .unwrap()
+        //     .then((originalPromiseResult) => {
+        //         setNewRelease(originalPromiseResult);
+        //     });
         //Popular Tv
         dispatch(fetchPopularTv())
             .unwrap()
@@ -114,7 +114,7 @@ const Browse = () => {
                 <div className="space-y-10">
                     <div>
                         <div className={mx40}>New Release</div>
-                        <Swiper
+                        {/* <Swiper
                             freeMode
                             speed={1000}
                             slidesPerView={4}
@@ -126,7 +126,7 @@ const Browse = () => {
                             {renderSwiperSlides(newRelease)}
                             <CustomLeftArrow />
                             <CustomRightArrow />
-                        </Swiper>
+                        </Swiper> */}
                     </div>
                     <div>
                         <div className={mx40}>Popular K-Drama</div>

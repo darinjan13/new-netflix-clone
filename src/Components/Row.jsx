@@ -56,7 +56,7 @@ const MoviesCard = ({
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 className={`${
-                    splitLocation[1] === "search" && "mb-20 mx-2 "
+                    splitLocation[1] === "search" && "mb-10 md:mb-20 mx-1 md:mx-2 "
                 } md:hover:z-40 relative md:hover:shadow-2xl md:hover:scale-150 transition-all duration-1000 `}
             >
                 <motion.img
@@ -75,7 +75,7 @@ const MoviesCard = ({
                 />
                 <span
                     className={`${
-                        show === false ? "lg:opacity-0" : "lg:opacity-100"
+                        show === false ? "opacity-0" : "md:opacity-100"
                     }  bg-slate-900/70 absolute inset-x-0 bottom-0 transition-all duration-1000`}
                 >
                     <h1 className="text-center inline-block w-auto">
