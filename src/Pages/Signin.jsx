@@ -31,7 +31,7 @@ const Signin = () => {
         setButtonDisable(true);
         try {
             await signIn(email, password);
-            window.location.href = "/home"
+            window.location.href = "/browse"
         } catch (error) {
             setError(true);
             setButtonLoading(false);

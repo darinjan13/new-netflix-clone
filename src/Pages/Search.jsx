@@ -6,16 +6,15 @@ import { motion } from "framer-motion";
 import { fetchSearch } from "../redux/searchSlice";
 import { useUpdateTitle } from "../Hooks/Hooks";
 
-import Modal from "../Components/Modal";
-import MoviesCard from "../Components/MovieCard";
+import Row from "../Components/Row";
+import { useCallback } from "react";
 
 const Search = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
-    const [modal, setModal] = useState(false);
-    const [selectedMovie, setSelectedMovie] = useState({});
     const [results, setResults] = useState();
     const [page, setPage] = useState(2);
+    const search = searchParams.get("q");
 
     useUpdateTitle("Search");
 
@@ -29,13 +28,27 @@ const Search = () => {
 
     useEffect(() => {
         setPage(2);
-    }, [searchParams]);
+    }, [search]);
+
+    const handleScroll = useCallback(() => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop !==
+            document.documentElement.offsetHeight
+        )
+            return;
+        setPage(page + 1);
+    }, [page]);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [handleScroll]);
 
     return (
         <motion.div
-            // variants={staggerHalf}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{
                 duration: 0.8,
                 delay: 0.5,
@@ -43,36 +56,13 @@ const Search = () => {
             }}
             className="bg-gray-900/90 overflow-hidden min-h-screen"
         >
-            {selectedMovie && (
-                <Modal
-                    setSelectedMovie={setSelectedMovie}
-                    selectedMovie={selectedMovie}
-                    modal={modal}
-                    setModal={setModal}
-                />
-            )}
-            <button onClick={() => setPage(page + 1)}>Load More</button>
             {results !== null && (
                 <div className="box-border py-10 px-[10px] md:px-[60px]">
-                    <motion.div
-                        // key={searchParams}
-                        // initial={{opacity: 0}}
-                        // animate={{opacity: 1}}
-                        // exit={{opacity: 0}}
-                        // transition={{duration: 1}}
-                        className="grid grid-cols-5 items-center text-white"
-                    >
-                        {results?.map((result, id) => {
-                            return (
-                                <MoviesCard
-                                    key={id}
-                                    movies={result}
-                                    setSelectedMovie={setSelectedMovie}
-                                    setModal={setModal}
-                                />
-                            );
+                    <div className="grid grid-cols-5 items-center text-white">
+                        {results?.map((result, index) => {
+                            return <Row key={index} movies={result} />;
                         })}
-                    </motion.div>
+                    </div>
                 </div>
             )}
         </motion.div>

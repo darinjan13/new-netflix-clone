@@ -14,28 +14,11 @@ const HomeNavbar = () => {
     // const [menuOpen, setMenuOpen] = useState(false);
     const [buttonLoading, setButtonLoading] = useState(false);
     const [buttonDisable, setButtonDisable] = useState(false);
-    const [navbarColor, setNavbarColor] = useState("bg-black");
     const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
     const { pathname } = location;
     const splitLocation = pathname.split("/");
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setNavbarColor("transparent")
-            } else {
-                setNavbarColor("bg-black")
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
 
     useEffect(() => {
         if (splitLocation[1] !== "search") {
@@ -91,11 +74,9 @@ const HomeNavbar = () => {
                 </Link>
                 <Link
                     className={`${
-                        splitLocation[1] === "movie"
-                            ? "bg-red-600"
-                            : ""
+                        splitLocation[1] === "movie" ? "bg-red-600" : ""
                     } rounded-md text-white font-semibold hover:bg-red-600 p-1 xl:p-2`}
-                    to="/movie"
+                    to="/movies"
                 >
                     Movies
                 </Link>
@@ -104,7 +85,7 @@ const HomeNavbar = () => {
     };
 
     return (
-        <nav className={`sticky z-50 top-0 ${navbarColor} md:px-10`}>
+        <nav className={`sticky z-50 top-0 bg-black md:px-10`}>
             <div className="grid grid-cols-2 md:justify-between items-center w-full p-2 xl:p-4">
                 <div className="flex flex-row items-center space-x-2 md:space-x-10">
                     <img className="h-3 md:h-5" src={Logo} alt="Netflix" />
@@ -116,9 +97,8 @@ const HomeNavbar = () => {
                         <Popover.Panel className="absolute z-50">
                             <div className="grid">
                                 <Link to="/browse">Home</Link>
-                                <Link to="/browse">TV Shows</Link>
-                                <Link to="/browse">Movies</Link>
-                                <Link to="/browse">Home</Link>
+                                <Link to="/tv">TV Shows</Link>
+                                <Link to="/movies">Movies</Link>
                             </div>
                         </Popover.Panel>
                     </Popover>

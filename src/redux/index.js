@@ -2,15 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import authSlice from "./authSlice";
 import popularsSlice from "./popularsSlice";
-import newReleasesSlice from "./newReleasesSlice";
 import discoverSlice from "./discoverSlice";
 import detailsSlice from "./detailsSlice";
 import searchSlice from "./searchSlice";
+import trendingSlice from "./trendingSlice";
 export const store = configureStore({
     reducer: {
         auth: authSlice,
+        trending: trendingSlice,
         populars: popularsSlice,
-        newReleases: newReleasesSlice,
         details: detailsSlice,
         discover: discoverSlice,
         search: searchSlice

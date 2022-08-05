@@ -1,48 +1,58 @@
+import { lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 
-import Browse from "../Pages/Browse.jsx";
-import HomePage from "../Pages/HomePage.jsx";
-import Signin from "../Pages/Signin.jsx";
-import Signup from "../Pages/Signup.jsx";
-import NewRelease from "../Pages/NewRelease.jsx";
-import ContinueWatching from "../Pages/ContinueWatching.jsx";
 import Search from "../Pages/Search.jsx";
-import NotFound from "../Pages/NotFound.jsx";
+import Modal from "../Pages/Modal.jsx";
 
 import ProtectedRoutes from "./ProtectedRoutes";
+
+const Browse = lazy(() => import("../Pages/Browse.jsx"));
+const HomePage = lazy(() => import("../Pages/HomePage.jsx"));
+const Signin = lazy(() => import("../Pages/Signin.jsx"));
+const Signup = lazy(() => import("../Pages/Signup.jsx"));
+const TvShows = lazy(() => import("../Pages/TvShows.jsx"));
+const Movies = lazy(() => import("../Pages/Movies.jsx"));
+const NotFound = lazy(() => import("../Pages/NotFound.jsx"));
 const AnimatedRoutes = () => {
     const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const { pathname } = location;
     return (
-        <AnimatePresence exitBeforeEnter>
-            <Routes location={location} key={location.pathname}>
+        <AnimatePresence>
+            <Routes location={location} key={pathname}>
                 <Route exact path="/" element={<HomePage />} />
                 <Route exact path="/signin" element={<Signin />} />
                 <Route exact path="/signup" element={<Signup />} />
                 <Route
-                    exact
                     path="/browse"
                     element={
                         <ProtectedRoutes>
-                            <Browse />
+                            <Suspense fallback={<></>}>
+                                <Browse />
+                            </Suspense>
                         </ProtectedRoutes>
                     }
                 ></Route>
                 <Route
                     exact
-                    path="/newrelease"
+                    path="/tv"
                     element={
                         <ProtectedRoutes>
-                            <NewRelease />
+                            <Suspense fallback={<></>}>
+                                <TvShows />
+                            </Suspense>
                         </ProtectedRoutes>
                     }
                 />
                 <Route
                     exact
-                    path="/continuewatching"
+                    path="/movies"
                     element={
                         <ProtectedRoutes>
-                            <ContinueWatching />
+                            <Suspense fallback={<></>}>
+                                <Movies />
+                            </Suspense>
                         </ProtectedRoutes>
                     }
                 />
@@ -55,8 +65,20 @@ const AnimatedRoutes = () => {
                         </ProtectedRoutes>
                     }
                 />
-                <Route path="*" element={<NotFound />} />
+                <Route
+                    path="*"
+                    element={
+                        <Suspense fallback={<></>}>
+                            <NotFound />
+                        </Suspense>
+                    }
+                />
             </Routes>
+            {searchParams.get("id") && (
+                <Routes>
+                    <Route path={pathname} element={<Modal />} />
+                </Routes>
+            )}
         </AnimatePresence>
     );
 };

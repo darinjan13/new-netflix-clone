@@ -1,6 +1,7 @@
 .swiper {
     padding: 0 60px !important;
     overflow: visible !important;
+    z-index: 0 !important;
 }
 @media only screen and (max-width: 768px) {
     .swiper {

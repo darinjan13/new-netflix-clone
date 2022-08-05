@@ -5,7 +5,7 @@ export const CustomLeftArrow = () => {
     return (
         <button
             onClick={() => swiper.slidePrev()}
-            className="hidden absolute md:block opacity-25 hover:opacity-90 bg-gray-900/75 inset-y-0 left-0 my-auto h-full w-[60px] z-10"
+            className="hidden absolute lg:block opacity-10 hover:opacity-90 bg-gray-900/75 inset-y-0 left-0 my-auto h-full w-[60px] z-10"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export const CustomRightArrow = () => {
     return (
         <button
             onClick={() => swiper.slideNext()}
-            className="hidden absolute md:block opacity-25 hover:opacity-90 bg-gray-900/75 inset-y-0 right-0 my-auto h-full w-[60px] z-10"
+            className="hidden absolute lg:block opacity-10 hover:opacity-90 bg-gray-900/75 inset-y-0 right-0 my-auto h-full w-[60px] z-10"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
